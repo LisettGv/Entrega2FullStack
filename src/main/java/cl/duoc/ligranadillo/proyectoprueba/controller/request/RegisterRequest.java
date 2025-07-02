@@ -39,10 +39,10 @@ public class RegisterRequest {
     }
 
     public String getValidationCode() {
-        return "1234"; // cambiar si tienes lógica real
+        return "1234";
     }
 
     public String getUserId() {
-        return username; // cambiar si tienes ID separado
+        return username;
     }
 }
