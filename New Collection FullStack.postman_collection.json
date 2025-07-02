@@ -1,183 +1,519 @@
 {
 	"info": {
-		"_postman_id": "cae93bac-745a-4beb-962c-31d22ec759e5",
+		"_postman_id": "ce3ab911-22c9-4a98-80a6-61f03b53c1ef",
 		"name": "New Collection FullStack",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "43737719",
+		"_collection_link": "https://paula-4879578.postman.co/workspace/Paula's-Workspace~8c679c30-142d-43c9-83a6-31b70f668c23/collection/43737719-ce3ab911-22c9-4a98-80a6-61f03b53c1ef?action=share&source=collection_link&creator=43737719"
 	},
 	"item": [
 		{
-			"name": "Registrar usuario",
-			"request": {
-				"method": "POST",
-				"header": [{ "key": "Content-Type", "value": "application/json" }],
-				"url": {
-					"raw": "http://localhost:8080/api/v1/users/register",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["api", "v1", "users", "register"]
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Obtener usuario por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/users/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
 				},
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"username\": \"usuario1\",\n  \"password\": \"clave123\",\n  \"email\": \"usuario1@email.com\"\n}"
-				}
-			}
-		},
-		{
-			"name": "Login usuario",
-			"request": {
-				"method": "POST",
-				"header": [{ "key": "Content-Type", "value": "application/json" }],
-				"url": {
-					"raw": "http://localhost:8080/api/v1/users/login",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["api", "v1", "users", "login"]
+				{
+					"name": "Actualizar usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"username\": \"juanito\",\r\n  \"password\": \"pass123\",\r\n  \"email\": \"juanito@example.com\",\r\n  \"validated\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v2/users/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
 				},
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"username\": \"usuario1\",\n  \"password\": \"clave123\"\n}"
-				}
-			}
-		},
-		{
-			"name": "Validar usuario",
-			"request": {
-				"method": "PATCH",
-				"header": [{ "key": "Content-Type", "value": "application/json" }],
-				"url": {
-					"raw": "http://localhost:8080/api/v1/users/validate/usuario1",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["api", "v1", "users", "validate", "usuario1"]
+				{
+					"name": "Registrar usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"nombre\": \"Cristofalo Columbus\",\n  \"username\": \"juanito\",\n  \"password\": \"pass123\",\n  \"email\": \"juanito@example.com\",\n  \"validated\": false\n}"
+						},
+						"url": "localhost:8080/api/v2/users/crear"
+					},
+					"response": []
 				},
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"username\": \"usuario1\",\n  \"password\": \"clave123\",\n  \"email\": \"usuario1@email.com\"\n}"
-				}
-			}
-		},
-		{
-			"name": "Listar cursos",
-			"request": {
-				"method": "GET",
-				"url": {
-					"raw": "http://localhost:8080/api/v2/cursos/listar",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["api", "v2", "cursos", "listar"]
-				}
-			}
-		},
-		{
-			"name": "Crear curso",
-			"request": {
-				"method": "POST",
-				"header": [{ "key": "Content-Type", "value": "application/json" }],
-				"url": {
-					"raw": "http://localhost:8080/api/v2/cursos/crear",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["api", "v2", "cursos", "crear"]
+				{
+					"name": "Login usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"juanito@example.com\",\n  \"password\": \"pass123\"\n}"
+						},
+						"url": "localhost:8080/api/v2/users/login"
+					},
+					"response": []
 				},
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"nombre\": \"Curso Java\",\n  \"descripcion\": \"Intro a Java\",\n  \"categoria\": \"Backend\",\n  \"fechaInicio\": \"2024-06-01\",\n  \"fechaFin\": \"2024-07-01\",\n  \"instructor\": \"Prof. Juan\"\n}"
-				}
-			}
-		},
-		{
-			"name": "Listar contenidos",
-			"request": {
-				"method": "GET",
-				"url": {
-					"raw": "http://localhost:8080/api/v3/contenidos/listar",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["api", "v3", "contenidos", "listar"]
-				}
-			}
-		},
-		{
-			"name": "Subir contenido",
-			"request": {
-				"method": "POST",
-				"header": [{ "key": "Content-Type", "value": "application/json" }],
-				"url": {
-					"raw": "http://localhost:8080/api/v3/contenidos/crear",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["api", "v3", "contenidos", "crear"]
+				{
+					"name": "Eliminar usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/users/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
 				},
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"titulo\": \"Clase 1\",\n  \"descripcion\": \"Video introductorio\",\n  \"tipo\": \"video\",\n  \"url\": \"http://videoserver.com/clase1.mp4\"\n}"
+				{
+					"name": "Listar usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/v2/users/listar"
+					},
+					"response": []
 				}
-			}
+			]
 		},
 		{
-			"name": "Listar evaluaciones",
-			"request": {
-				"method": "GET",
-				"url": {
-					"raw": "http://localhost:8080/api/v4/evaluaciones/listar",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["api", "v4", "evaluaciones", "listar"]
-				}
-			}
-		},
-		{
-			"name": "Crear evaluación",
-			"request": {
-				"method": "POST",
-				"header": [{ "key": "Content-Type", "value": "application/json" }],
-				"url": {
-					"raw": "http://localhost:8080/api/v4/evaluaciones/crear",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["api", "v4", "evaluaciones", "crear"]
+			"name": "Contenidos",
+			"item": [
+				{
+					"name": "Obtener contenido por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/contenidos/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"contenidos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
 				},
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"titulo\": \"Prueba 1\",\n  \"tipo\": \"cuestionario\",\n  \"puntajeMaximo\": 100,\n  \"cursoId\": \"1\"\n}"
+				{
+					"name": "Actualizar contenido",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"titulo\": \"Introducción a Java\",\r\n  \"tipo\": \"Video, Documento, etc.\",\r\n  \"url\": \"https://youtube.com/xyz\",\r\n  \"descripcion\": \"Video explicativo de conceptos básicos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v2/contenidos/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"contenidos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar contenido",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/contenidos/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"contenidos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear contenido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n  \"titulo\":\"Prueba\",\n  \"tipo\": \"Video\",\n  \"url\": \"https://youtube.com/xyz\",\n  \"descripcion\": \"Video explicativo de conceptos básicos\"\n}"
+						},
+						"url": "localhost:8080/api/v2/contenidos/crear"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar contenidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/v2/contenidos/listar"
+					},
+					"response": []
 				}
-			}
+			]
 		},
 		{
-			"name": "Eliminar curso",
-			"request": {
-				"method": "DELETE",
-				"url": {
-					"raw": "http://localhost:8080/api/v2/cursos/1",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["api", "v2", "cursos", "1"]
+			"name": "Evaluaciones",
+			"item": [
+				{
+					"name": "Obtener evaluación por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/evaluaciones/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"evaluaciones",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar evaluación",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"titulo\": \"Prueba Parcial de Java\",\r\n  \"tipo\": \"Cuestionario\",\r\n  \"puntajeMaximo\": 100,\r\n  \"cursoId\": \"3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v2/evaluaciones/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"evaluaciones",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar evaluación",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/evaluaciones/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"evaluaciones",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear evaluación",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"titulo\": \"Prueba Parcial de Java\",\n  \"tipo\": \"Cuestionario\",\n  \"puntajeMaximo\": 100,\n  \"cursoId\": \"3\"\n}"
+						},
+						"url": "localhost:8080/api/v2/evaluaciones/crear"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar evaluaciones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/v2/evaluaciones/listar"
+					},
+					"response": []
 				}
-			}
+			]
 		},
 		{
-			"name": "Eliminar contenido",
-			"request": {
-				"method": "DELETE",
-				"url": {
-					"raw": "http://localhost:8080/api/v3/contenidos/1",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["api", "v3", "contenidos", "1"]
+			"name": "Cursos",
+			"item": [
+				{
+					"name": "Obtener curso por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v2/cursos/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"cursos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar curso",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"nombre\": \"Java Básico\",\r\n  \"descripcion\": \"Introducción a Java\",\r\n  \"categoria\": \"Programación\",\r\n  \"fechaInicio\": \"2025-07-01\",\r\n  \"fechaFin\": \"2025-08-01\",\r\n  \"instructor\": \"Juan Pérez\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v2/cursos/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"cursos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar curso",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v2/cursos/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v2",
+								"cursos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear curso",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 1,\n  \"nombre\": \"Java Básico\",\n  \"descripcion\": \"Introducción a Java\",\n  \"categoria\": \"Programación\",\n  \"fechaInicio\": \"2025-07-01\",\n  \"fechaFin\": \"2025-08-01\",\n  \"instructor\": \"Juan Pérez\"\n}"
+						},
+						"url": "http://localhost:8080/api/v2/cursos/crear"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar cursos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/v2/cursos/listar"
+					},
+					"response": []
 				}
-			}
-		},
-		{
-			"name": "Eliminar evaluación",
-			"request": {
-				"method": "DELETE",
-				"url": {
-					"raw": "http://localhost:8080/api/v4/evaluaciones/1",
-					"host": ["localhost"],
-					"port": "8080",
-					"path": ["api", "v4", "evaluaciones", "1"]
-				}
-			}
+			]
 		}
 	]
 }

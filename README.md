@@ -124,6 +124,11 @@ Para probar cada endpoint, ver parámetros y respuestas esperadas.
 
 ---
 
+## Colección Postman
+
+En la raíz del repositorio se encuentra una colección postman con los mismos métodos descritos en swagger para 
+conveniencia del usuario.
+
 ## Pruebas unitarias
 
 El proyecto incluye tests con JUnit 5 y Mockito, ubicados en `src/test/java`.
