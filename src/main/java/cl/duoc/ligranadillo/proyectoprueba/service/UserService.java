@@ -1,55 +1,60 @@
 package cl.duoc.ligranadillo.proyectoprueba.service;
 
 import cl.duoc.ligranadillo.proyectoprueba.model.User;
+import cl.duoc.ligranadillo.proyectoprueba.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
 
-    private final Map<String, User> users = new HashMap<>();
-    private final Map<String, String> validationCodes = new HashMap<>();
+    private final UserRepository userRepository;
 
-    public RegisterUserResult registerUser(String username, String password, String email) {
-        if (users.containsKey(username)) {
-            throw new IllegalArgumentException("El usuario ya existe");
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public User guardarUser(User user) {
+        return userRepository.save(user);
+    }
+
+    public List<User> obtenerUsers() {
+        return userRepository.findAll();
+    }
+
+    public Optional<User> obtenerUserPorId(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public Optional<User> actualizarUser(Long id, User userActualizado) {
+        return userRepository.findById(id).map(userExistente -> {
+            userExistente.setNombre(userActualizado.getNombre());
+            userExistente.setPassword(userActualizado.getPassword());
+            userExistente.setEmail(userActualizado.getEmail());
+            userExistente.setValidated(userActualizado.isValidated());
+            return userRepository.save(userExistente);
+        });
+    }
+
+
+    public boolean eliminarUser(Long id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
         }
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setValidated(false);
-
-        String userId = UUID.randomUUID().toString();
-        user.setId(userId);
-        users.put(username, user);
-
-        // Generar un código de validación ficticio
-        validationCodes.put(username, "1234");
-
-        return new RegisterUserResult(userId);
+        return false;
     }
 
-    public boolean validateLogin(String username, String password) {
-        User user = users.get(username);
-        return user != null && user.getPassword().equals(password) && user.isValidated();
+    public Optional<User> login(String email, String password) {
+        Optional<User> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isPresent() && userOpt.get().getPassword().equals(password)) {
+            return userOpt;
+        }
+        return Optional.empty();
     }
 
-    public boolean validateUser(String username, String validationCode) {
-        if (!validationCodes.containsKey(username)) return false;
-        if (!validationCodes.get(username).equals(validationCode)) return false;
-
-        User user = users.get(username);
-        if (user == null) return false;
-
-        user.setValidated(true);
-        return true;
-    }
-
-    public User getUserByUsername(String username) {
-        return users.get(username);
-    }
 }

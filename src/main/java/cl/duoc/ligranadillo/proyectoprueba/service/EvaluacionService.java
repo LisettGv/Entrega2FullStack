@@ -1,42 +1,50 @@
 package cl.duoc.ligranadillo.proyectoprueba.service;
 
 import cl.duoc.ligranadillo.proyectoprueba.model.Evaluacion;
+import cl.duoc.ligranadillo.proyectoprueba.repository.EvaluacionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EvaluacionService {
 
-    private final Map<Long, Evaluacion> evaluaciones = new HashMap<>();
-    private final AtomicLong idGenerator = new AtomicLong();
+    private final EvaluacionRepository evaluacionRepository;
+
+    @Autowired
+    public EvaluacionService(EvaluacionRepository evaluacionRepository) {
+        this.evaluacionRepository = evaluacionRepository;
+    }
 
     public Evaluacion guardarEvaluacion(Evaluacion evaluacion) {
-        Long id = idGenerator.incrementAndGet();
-        evaluacion.setId(id);
-        evaluaciones.put(id, evaluacion);
-        return evaluacion;
+        return evaluacionRepository.save(evaluacion);
     }
 
     public List<Evaluacion> obtenerEvaluaciones() {
-        return new ArrayList<>(evaluaciones.values());
+        return evaluacionRepository.findAll();
     }
 
     public Optional<Evaluacion> obtenerEvaluacionPorId(Long id) {
-        return Optional.ofNullable(evaluaciones.get(id));
+        return evaluacionRepository.findById(id);
     }
 
     public Optional<Evaluacion> actualizarEvaluacion(Long id, Evaluacion evaluacionActualizada) {
-        if (evaluaciones.containsKey(id)) {
-            evaluacionActualizada.setId(id);
-            evaluaciones.put(id, evaluacionActualizada);
-            return Optional.of(evaluacionActualizada);
-        }
-        return Optional.empty();
+        return evaluacionRepository.findById(id).map(evaluacionExistente -> {
+            evaluacionExistente.setTitulo(evaluacionActualizada.getTitulo());
+            evaluacionExistente.setTipo(evaluacionActualizada.getTipo());
+            evaluacionExistente.setPuntajeMaximo(evaluacionActualizada.getPuntajeMaximo());
+            evaluacionExistente.setCursoId(evaluacionActualizada.getCursoId());
+            return evaluacionRepository.save(evaluacionExistente);
+        });
     }
 
     public boolean eliminarEvaluacion(Long id) {
-        return evaluaciones.remove(id) != null;
+        if (evaluacionRepository.existsById(id)) {
+            evaluacionRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
