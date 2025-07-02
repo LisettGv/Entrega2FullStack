@@ -94,7 +94,7 @@ src
    cd proyecto
    ```
 
-2. Configura el archivo `application.properties` o `application.yml` para tu base de datos MySQL.
+2. Configura el archivo `application.properties` para tu base de datos MySQL.
 
    Ejemplo `application.properties`:
    ```
