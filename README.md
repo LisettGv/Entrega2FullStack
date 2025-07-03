@@ -90,17 +90,17 @@ src
 
 1. Clona el repositorio
    ```
-   git clone https://github.com/usuario/proyecto.git
-   cd proyecto
+   git clone https://github.com/LisettGv/Entrega2FullStack.git
+   cd Entrega2FullStack
    ```
 
 2. Configura el archivo `application.properties` para tu base de datos MySQL.
 
    Ejemplo `application.properties`:
    ```
-   spring.datasource.url=jdbc:mysql://localhost:3306/educacion
+   spring.datasource.url=jdbc:mysql://localhost:3306/edutechdb
    spring.datasource.username=root
-   spring.datasource.password=tu_password
+   spring.datasource.password=#Pon aquí tu contraseña si la configuraste así en tu base de datos
    spring.jpa.hibernate.ddl-auto=update
    spring.jpa.show-sql=true
    ```
